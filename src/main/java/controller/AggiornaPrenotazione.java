@@ -24,22 +24,6 @@ public class AggiornaPrenotazione extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String prenotazioneId = request.getParameter("id");
-
-        if (prenotazioneId == "" || prenotazioneId == null)
-            request.getRequestDispatcher("/RegistraPrenotazione").forward(request, response);
-        else {
-            int id = Integer.parseInt(prenotazioneId);
-            PrenotazioneDao prenotazioneDao = PrenotazioneDaoImplement.getInstance();
-            Prenotazione prenotazione = prenotazioneDao.trovaById(id);
-            request.setAttribute("prenotazione", prenotazione);
-            request.getRequestDispatcher("/RegistraPrenotazione").forward(request, response);
-        }
-    }
-
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      * response)
@@ -68,5 +52,21 @@ public class AggiornaPrenotazione extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      *      response)
      */
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String prenotazioneId = request.getParameter("id");
+
+        if (prenotazioneId == "" || prenotazioneId == null)
+            request.getRequestDispatcher("/RegistraPrenotazione").forward(request, response);
+        else {
+            int id = Integer.parseInt(prenotazioneId);
+            PrenotazioneDao prenotazioneDao = PrenotazioneDaoImplement.getInstance();
+            Prenotazione prenotazione = prenotazioneDao.trovaById(id);
+            request.setAttribute("prenotazione", prenotazione);
+            request.getRequestDispatcher("/RegistraPrenotazione").forward(request, response);
+        }
+    }
 
 }

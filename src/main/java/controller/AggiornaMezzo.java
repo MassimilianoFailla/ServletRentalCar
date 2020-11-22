@@ -38,8 +38,10 @@ public class AggiornaMezzo extends HttpServlet {
             MezzoDao mezzoDao = MezzoDaoImplement.getInstance();
             Mezzo mezzo = mezzoDao.trovaById(id);
             request.setAttribute("mezzo", mezzo);
+
             List<Mezzo> listaMezzi = mezzoDao.trovaMezzi();
             request.setAttribute("listaMezzi", listaMezzi);
+
             request.getRequestDispatcher("registrazioneMezzo.jsp").forward(request, response);
         }
     }

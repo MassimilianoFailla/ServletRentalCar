@@ -1,7 +1,7 @@
 <%@page isELIgnored="false" language="java"
         contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
-        import="java.util.*, domain.*, controller.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+        import="java.util.*, domain.*, controller.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -44,7 +44,7 @@
     </style>
 </head>
 <h1>REGISTRAZIONE MEZZO - RENTAL CAR</h1>
-<c:url value="/RegistraMezzo" var="registerUrl" />
+<c:url value="/RegistraMezzo" var="registerUrl"/>
 <form action="${registerUrl}" method="post">
     <table>
         <c:if test="${mezzo.id ne null}">
@@ -74,11 +74,6 @@
             <td><input type="text" name="targa"
                        value="${mezzo.targa}" required></td>
         </tr>
-        <%--<tr>
-            <td>Tipologia:</td>
-            <td><input type="text" name="tipologia"
-                       value="${mezzo.tipologia}" required></td>
-        </tr>--%>
         <tr>
             <td>Tipologia:</td>
             <td>
@@ -90,7 +85,7 @@
                     <option value="Suv">Suv</option>
                     <option value="Camioncino">Camioncino</option>
                     name="tipologia" value="${mezzo.tipologia}" required></td>
-                </select>
+            </select>
         </tr>
 
         <c:if test="${mezzo.id ne null}">
@@ -105,40 +100,5 @@
         </c:if>
     </table>
 </form>
-<%--<br>--%>
-<%--<h1>Lista Mezzi</h1>--%>
-<%--<table>--%>
-    <%--<tr>--%>
-        <%--<th>ID</th>--%>
-        <%--<th>Casa Costruttrice</th>--%>
-        <%--<th>Modello</th>--%>
-        <%--<th>Anno Immatricolazione</th>--%>
-        <%--<th>Targa</th>--%>
-        <%--<th>Tipologia</th>--%>
-        <%--<th>Aggiorna</th>--%>
-        <%--<th>Cancella</th>--%>
-    <%--</tr>--%>
-    <%--<c:forEach items="${listaMezzi}" var="mezzo">--%>
-        <%--<tr>--%>
-            <%--<td>${mezzo.id}</td>--%>
-            <%--<td>${mezzo.casaCostruttrice}</td>--%>
-            <%--<td>${mezzo.modello}</td>--%>
-            <%--<td>${mezzo.annoImmatricolazione}</td>--%>
-            <%--<td>${mezzo.targa}</td>--%>
-            <%--<td>${mezzo.tipologia}</td>--%>
-            <%--<td>--%>
-                <%--<form action="<c:url value="/AggiornaMezzo"/>" method="get">--%>
-                    <%--<input type="hidden" name="id" value="${mezzo.id}">--%>
-                    <%--<input type="submit" value="Aggiorna">--%>
-                <%--</form>--%>
-            <%--<td>--%>
-                <%--<form action="<c:url value="/CancellaMezzo"/>" method="post">--%>
-                    <%--<input type="hidden" name="id" value="${mezzo.id}">--%>
-                    <%--<input style="background: #F00;" type="submit" value="Cancella">--%>
-                <%--</form>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-<%--</table>--%>
 </body>
 </html>

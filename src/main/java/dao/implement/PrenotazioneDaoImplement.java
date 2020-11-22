@@ -42,7 +42,7 @@ public class PrenotazioneDaoImplement implements PrenotazioneDao {
         session.close();
     }
 
-    public Prenotazione trovaById(int id) {
+    public Prenotazione trovaPrenotazionePerId(int id) {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery(" FROM Prenotazione P WHERE P.id = :id ");
@@ -53,12 +53,12 @@ public class PrenotazioneDaoImplement implements PrenotazioneDao {
         return prenotazione;
     }
 
-    @SuppressWarnings({ "unchecked", "deprecation" })
-    public List<Prenotazione> trovaPrenotazioniById(int id) {
+    @SuppressWarnings({"unchecked", "deprecation"})
+    public List<Prenotazione> trovaPrenotazioniPerId(int id) {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         String hql = "SELECT P.* FROM Prenotazione P, Mezzo M "
-                + " WHERE P.mezz.targa = M.targa AND P.utente.id =  :id";
+                + " WHERE P.mezzo.targa = M.targa AND P.utente.id =  :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         List<Prenotazione> listaPrenotazioni = query.list();
@@ -67,15 +67,15 @@ public class PrenotazioneDaoImplement implements PrenotazioneDao {
         return listaPrenotazioni;
     }
 
-    @SuppressWarnings({ "unchecked", "deprecation" })
+    @SuppressWarnings({"unchecked", "deprecation"})
     public List<Prenotazione> trovaPrenotazioni() {
-            Session session = this.sessionFactory.openSession();
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery(" FROM Prenotazione P ");
-            List<Prenotazione> listaPrenotazioni = query.list();
-            tx.commit();
-            session.close();
-            return listaPrenotazioni;
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery(" FROM Prenotazione P ");
+        List<Prenotazione> listaPrenotazioni = query.list();
+        tx.commit();
+        session.close();
+        return listaPrenotazioni;
     }
 
     public static PrenotazioneDao getInstance() {

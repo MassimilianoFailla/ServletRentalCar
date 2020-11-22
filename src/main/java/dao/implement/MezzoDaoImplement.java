@@ -44,13 +44,28 @@ public class MezzoDaoImplement implements MezzoDao {
 
     public Mezzo trovaById(int id) {
         Session session = this.sessionFactory.openSession();
-        Mezzo mezzo = session.get(Mezzo.class, id);
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery(" FROM Mezzo M WHERE M.id = :id ");
+        query.setParameter("id", id);
+        Mezzo mezzo = (Mezzo) query.uniqueResult();
+        tx.commit();
         session.close();
-
         return mezzo;
     }
 
-    @SuppressWarnings({ "unchecked", "deprecation" })
+    @Override
+    public Mezzo trovaPerTarga(String targa) {
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery(" FROM Mezzo M WHERE M.targa = :targa ");
+        query.setParameter("targa", targa);
+        Mezzo mezzo = (Mezzo) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return mezzo;
+    }
+
+    @SuppressWarnings({"unchecked", "deprecation"})
     public List<Mezzo> trovaMezzi() {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
@@ -60,9 +75,6 @@ public class MezzoDaoImplement implements MezzoDao {
         session.close();
         return listaMezzi;
     }
-
-
-    // metodi da implementare per il filtraggio
 
     @Override
     public List<Mezzo> trovaPerModello(String modello) {
@@ -89,7 +101,7 @@ public class MezzoDaoImplement implements MezzoDao {
         return listaMezzi;
     }
 
-    public List<Mezzo> trovaPerAnnoImmatricolazione(int annoImmatricolazione) {
+    public List<Mezzo> trovaPerAnnoImmatricolazione(String annoImmatricolazione) {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery(" FROM Mezzo M WHERE M.annoImmatricolazione = :annoImmatricolazione ");

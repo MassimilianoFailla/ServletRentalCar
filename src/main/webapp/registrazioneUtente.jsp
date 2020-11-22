@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>RENTALCAR SERVLET - REGISTRAZIONE UTENTI</title>
@@ -42,18 +43,13 @@
             text-decoration: none;
         }
     </style>
+
 </head>
+
 <h1>REGISTRAZIONE UTENTE - RENTAL CAR</h1>
 <c:url value="/RegistraUtente" var="registerUrl"/>
 <form action="${registerUrl}" method="post">
     <table>
-        <c:if test="${utente.id ne null}">
-            <tr>
-                <td>Id Utente:</td>
-                <td><input type="text" name="id" value="${utente.id}"
-                           readonly="readonly"></td>
-            </tr>
-        </c:if>
         <tr>
             <td>Nome:</td>
             <td><input type="text" name="nome" value="${utente.nome}"
@@ -61,8 +57,10 @@
         </tr>
         <tr>
             <td>Cognome:</td>
-            <td><input type="text" name="cognome" value="${utente.cognome}"
-                       required></td>
+            <td>
+                <input type="text" name="cognome" value="${utente.cognome}"
+                       required>
+            </td>
         </tr>
         <tr>
             <td>Data Di Nascita:</td>
@@ -95,8 +93,10 @@
             <select name="role">
                 <option value="SuperUser">SuperUser</option>
                 <option value="Customer">Customer</option>
-                name="role" value="${utente.role}" required></td>
-        </select>
+                name="role" value="${utente.role}" required>
+            </select>
+        </td>
+
         </tr>
 
         <c:if test="${utente.id ne null}">
@@ -110,8 +110,6 @@
             </tr>
         </c:if>
     </table>
+
 </form>
-</body>
 </html>
-</thead>
-</table>

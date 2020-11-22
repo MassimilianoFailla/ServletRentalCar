@@ -18,9 +18,17 @@ public class SuperUser extends HttpServlet {
 
     private UtenteDao utenteDao = UtenteDaoImplement.getInstance();
 
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public SuperUser() {
 
     }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -31,6 +39,11 @@ public class SuperUser extends HttpServlet {
         request.getRequestDispatcher("superuser.jsp").forward(request, response);
 
     }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

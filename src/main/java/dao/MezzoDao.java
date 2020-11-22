@@ -14,6 +14,8 @@ public interface MezzoDao {
 
     Mezzo trovaById(int id);
 
+    Mezzo trovaPerTarga(String targa);
+
     List<Mezzo> trovaMezzi();
 
     //metodi da implementare nel filtraggio
@@ -22,5 +24,5 @@ public interface MezzoDao {
 
     List<Mezzo> trovaPerCasaCostruttrice(String casaCostruttrice);
 
-    List<Mezzo> trovaPerAnnoImmatricolazione(int annoImmatricolazione);
+    List<Mezzo> trovaPerAnnoImmatricolazione(String annoImmatricolazione);
 }

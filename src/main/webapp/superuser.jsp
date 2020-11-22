@@ -12,16 +12,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>SUPER USER - RENTALCAR</title>
+
     <style type="text/css">
         body {
             text-align: center;
-        }
-
-        table {
-            margin-left: 15%;
-            min-width: 70%;
-            border: 1px solid #CCC;
-            border-collapse: collapse;
         }
 
         .center {
@@ -29,28 +23,16 @@
             margin-right: auto;
         }
 
-        table tr {
-            line-height: 30px;
-        }
-
-        table tr th {
-            background: #608c8b;
-            color: #FFF;
-        }
-
-        table tr td {
-            border: 1px solid #CCC;
-            margin: 5px;
-        }
-
         a {
             text-decoration: none;
         }
     </style>
+
 </head>
-<title>SuperUser</title>
-</head>
+
 <body class="center">
+<title>SuperUser</title>
+
 <h1 class="center">SUPER USER - RENTAL CAR</h1>
 <fieldset style="width: 300px" class="center">
     <legend> SUPER USER - RENTALCAR</legend>
@@ -73,7 +55,8 @@
             <a href="/GestisciUtenti">
                 <td colspan="2"><input type="submit" value="Gestisci Utenti"></td>
             </a>
+        </a>
+    </a>
 </fieldset>
-</form>
 </body>
 </html>

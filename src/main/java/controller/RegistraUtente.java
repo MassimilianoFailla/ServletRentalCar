@@ -63,7 +63,7 @@ public class RegistraUtente extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        Utente utente = new Utente(nome, cognome, email, dataNascita, codiceFiscale, username, password, role);
+        Utente utente = new Utente(nome, cognome, dataNascita, codiceFiscale, email, username, password, role);
         if (utenteId == null || utenteId == "")
             utenteDao.salvaUtente(utente);
         else {

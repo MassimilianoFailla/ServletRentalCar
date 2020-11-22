@@ -37,7 +37,7 @@ public class Utente implements Serializable {
     @Column(name = "role")
     private String role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "utente",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "utente")
     private List<Prenotazione> listaPrenotazioni;
     public List<Prenotazione> getPrenotazione() {
         return listaPrenotazioni;

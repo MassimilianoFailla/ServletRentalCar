@@ -1,7 +1,7 @@
 <%@page isELIgnored="false" language="java"
         contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
-        import="java.util.*, domain.*, controller.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+        import="java.util.*, domain.*, controller.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -12,23 +12,28 @@
         body {
             text-align: center;
         }
+
         table {
             margin-left: 15%;
             min-width: 70%;
             border: 1px solid #CCC;
             border-collapse: collapse;
         }
+
         table tr {
             line-height: 30px;
         }
+
         table tr th {
             background: #000033;
             color: #FFF;
         }
+
         table tr td {
             border: 1px solid #CCC;
             margin: 5px;
         }
+
         input[type=text], input[type=email], input[type=tel] {
             min-width: 60%;
         }
@@ -39,7 +44,7 @@
     </style>
 </head>
 <h1>REGISTRAZIONE PRENOTAZIONE - RENTAL CAR</h1>
-<c:url value="/RegistraPrenotazione" var="registerUrl" />
+<c:url value="/RegistraPrenotazione" var="registerUrl"/>
 <form action="${registerUrl}" method="post">
     <table>
         <c:if test="${prenotazione.id ne null}">
@@ -85,7 +90,9 @@
         <th>Inizio Prenotazione</th>
         <th>Fine Prenotazione</th>
         <th>Targa Mezzo Prenotato</th>
-        <th>Id Utente</th>
+        <th>Modello Mezzo Prenotato</th>
+        <th>Nome Utente</th>
+        <th>Codice Fiscale Utente</th>
         <th>Aggiorna</th>
         <th>Cancella</th>
     </tr>
@@ -94,7 +101,11 @@
             <td>${prenotazione.id}</td>
             <td>${prenotazione.inizioPrenotazione}</td>
             <td>${prenotazione.finePrenotazione}</td>
-            <td>${prenotazione.targaMezzo}</td>
+            <td>${prenotazione.mezzo.targa}</td>
+            <td>${prenotazione.mezzo.modello}</td>
+            <td>${prenotazione.utente.nome}</td>
+            <td>${prenotazione.utente.codiceFiscale}</td>
+
             <td>
                 <form action="<c:url value="/AggiornaPrenotazione"/>" method="get">
                     <input type="hidden" name="id" value="${prenotazione.id}">
@@ -103,47 +114,11 @@
             <td>
                 <form action="<c:url value="/CancellaPrenotazione"/>" method="post">
                     <input type="hidden" name="id" value="${prenotazione.id}">
-                    <input style="background: #F00;" type="submit" value="Cancella">
+                    <input type="submit" value="Cancella">
                 </form>
             </td>
         </tr>
     </c:forEach>
 </table>
-<%--<c:url value="/RegistraPrenotazione" var="registerUrl" />--%>
-<%--<form action="${listaMezzi}" method="get">--%>
-    <%--<br />--%>
-    <%--<br />--%>
-<%--<h1>Lista Mezzi</h1>--%>
-<%--<table>--%>
-    <%--<tr>--%>
-        <%--<th>ID</th>--%>
-        <%--<th>Casa Costruttrice</th>--%>
-        <%--<th>Modello</th>--%>
-        <%--<th>Anno Immatricolazione</th>--%>
-        <%--<th>Targa</th>--%>
-        <%--<th>Aggiorna</th>--%>
-        <%--<th>Cancella</th>--%>
-    <%--</tr>--%>
-    <%--<c:forEach items="${listaMezzi}" var="mezzo">--%>
-        <%--<tr>--%>
-            <%--<td>${mezzo.id}</td>--%>
-            <%--<td>${mezzo.casaCostruttrice}</td>--%>
-            <%--<td>${mezzo.modello}</td>--%>
-            <%--<td>${mezzo.annoImmatricolazione}</td>--%>
-            <%--<td>${mezzo.targa}</td>--%>
-            <%--<td>--%>
-                <%--<form action="<c:url value="/AggiornaMezzo"/>" method="get">--%>
-                    <%--<input type="hidden" name="id" value="${prenotazione.id}">--%>
-                    <%--<input type="submit" value="Aggiorna">--%>
-                <%--</form>--%>
-            <%--<td>--%>
-                <%--<form action="<c:url value="/CancellaMezzo"/>" method="post">--%>
-                    <%--<input type="hidden" name="id" value="${prenotazione.id}">--%>
-                    <%--<input style="background: #F00;" type="submit" value="Cancella">--%>
-                <%--</form>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-<%--</table>--%>
 </body>
 </html>

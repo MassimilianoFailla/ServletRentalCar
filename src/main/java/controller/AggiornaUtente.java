@@ -26,23 +26,6 @@ public class AggiornaUtente extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String utenteId = request.getParameter("id");
-
-        if (utenteId == "" || utenteId == null)
-            request.getRequestDispatcher("/RegistraUtente").forward(request, response);
-        else {
-            int id = Integer.parseInt(utenteId);
-            UtenteDao utenteDao = UtenteDaoImplement.getInstance();
-            Utente utente = utenteDao.trovaById(id);
-            request.setAttribute("utente", utente);
-            request.getRequestDispatcher("/RegistraUtente").forward(request, response);
-        }
-    }
-
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      * response)
@@ -71,5 +54,21 @@ public class AggiornaUtente extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      *      response)
      */
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String utenteId = request.getParameter("id");
+
+        if (utenteId == "" || utenteId == null)
+            request.getRequestDispatcher("/RegistraUtente").forward(request, response);
+        else {
+            int id = Integer.parseInt(utenteId);
+            UtenteDao utenteDao = UtenteDaoImplement.getInstance();
+            Utente utente = utenteDao.trovaById(id);
+            request.setAttribute("utente", utente);
+            request.getRequestDispatcher("/RegistraUtente").forward(request, response);
+        }
+    }
 
 }

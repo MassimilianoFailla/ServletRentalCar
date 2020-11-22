@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Prenotazione")
-public class Prenotazione implements Serializable{
+public class Prenotazione implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,30 +18,23 @@ public class Prenotazione implements Serializable{
     @Column(name = "finePrenotazione")
     private String finePrenotazione;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "idUtente", referencedColumnName = "id")
     private Utente utente;
 
-    @Column(insertable=false, updatable=false)
-    private int idUtente;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "targa", referencedColumnName = "targa")
+    @ManyToOne
+    @JoinColumn(name = "targa", referencedColumnName = "id")
     private Mezzo mezzo;
 
-
-    @Column(insertable=false, updatable=false, length = 100)
-    private String targa;
-
-    public Prenotazione(){
+    public Prenotazione() {
 
     }
 
-    public Prenotazione(String inizioPrenotazione, String finePrenotazione, int idUtente, String targa) {
+    public Prenotazione(String inizioPrenotazione, String finePrenotazione, Utente utente, Mezzo mezzo) {
         this.inizioPrenotazione = inizioPrenotazione;
         this.finePrenotazione = finePrenotazione;
-        this.idUtente = idUtente;
-        this.targa = targa;
+        this.utente = utente;
+        this.mezzo = mezzo;
     }
 
     public int getId() {
@@ -90,24 +83,8 @@ public class Prenotazione implements Serializable{
         this.mezzo = mezzo;
     }
 
-    public int getIdUtente() {
-        return idUtente;
-    }
-
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
-    }
-
-    public String getTarga() {
-        return targa;
-    }
-
-    public void setTarga(String targa) {
-        this.targa = targa;
-    }
-
     public String toString() {
-        return "Prenotazione -> Data Inizio: " +inizioPrenotazione+" - Data Fine: "+finePrenotazione
-                +"\nTarga Mezzo Prenotato: "+ targa+"\nId Utente: "+idUtente+" ;";
+        return "Prenotazione -> Data Inizio: " + inizioPrenotazione + " - Data Fine: " + finePrenotazione
+                + "\nMezzo Prenotato: " + mezzo + "\n Da ->  " + utente + " ;";
     }
 }

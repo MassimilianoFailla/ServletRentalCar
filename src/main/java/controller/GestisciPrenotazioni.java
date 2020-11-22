@@ -25,7 +25,7 @@ public class GestisciPrenotazioni extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Prenotazione> listaPrenotazione = prenotazioneDao.trovaPrenotazioni();
-        request.setAttribute("listaPrenotazione", listaPrenotazione);
+        request.setAttribute("listaPrenotazioni", listaPrenotazione);
 
         // richiamo il file jsp di registrazione utente
         request.getRequestDispatcher("gestisciPrenotazioni.jsp").forward(request, response);

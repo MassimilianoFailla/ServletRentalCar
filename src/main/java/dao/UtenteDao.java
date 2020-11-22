@@ -22,6 +22,10 @@ public interface UtenteDao {
 
     public List<Utente> trovaPerCognome(String cognome);
 
+    public Utente trovaPerEmail(String email);
+
+    public List<Utente> trovaPerAnnoNascita(String annoNascita);
+
     // -------------------------------------------------
 
 

@@ -17,30 +17,9 @@
             text-align: center;
         }
 
-        table {
-            margin-left: 15%;
-            min-width: 70%;
-            border: 1px solid #CCC;
-            border-collapse: collapse;
-        }
-
         .center {
             margin-left: auto;
             margin-right: auto;
-        }
-
-        table tr {
-            line-height: 30px;
-        }
-
-        table tr th {
-            background: #608c8b;
-            color: #FFF;
-        }
-
-        table tr td {
-            border: 1px solid #CCC;
-            margin: 5px;
         }
 
         a {

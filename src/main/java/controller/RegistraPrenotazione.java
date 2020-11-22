@@ -6,7 +6,7 @@ import dao.implement.MezzoDaoImplement;
 import dao.implement.PrenotazioneDaoImplement;
 import domain.Mezzo;
 import domain.Prenotazione;
-import org.hibernate.type.descriptor.java.LocalDateJavaDescriptor;
+import domain.Utente;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @WebServlet("/RegistraPrenotazione")
 public class RegistraPrenotazione extends HttpServlet {
@@ -46,8 +42,34 @@ public class RegistraPrenotazione extends HttpServlet {
             throws ServletException, IOException {
 
         // richiamo la lista delle prenotazioni che voglio visualizzare all'itnerno del db
-        List<Mezzo> listaMezzi = mezzoDao.trovaMezzi();
-        request.setAttribute("listaMezzi", listaMezzi);
+        // con l'apposito filtraggio
+        if (request.getParameter("filtro") == null) {
+            List<Mezzo> listaMezzi = mezzoDao.trovaMezzi();
+            request.setAttribute("listaMezzi", listaMezzi);
+        } else {
+            String selezione = request.getParameter("selezione");
+            String filtro = request.getParameter("filtro");
+            if (filtro.equals("")) {
+                List<Mezzo> listaMezzi = mezzoDao.trovaMezzi();
+                request.setAttribute("listaMezzi", listaMezzi);
+            } else {
+                if (selezione.equals("modello")) {
+                    System.out.println(filtro);
+                    List<Mezzo> listaMezzi = mezzoDao.trovaPerModello(filtro);
+                    request.setAttribute("listaMezzi", listaMezzi);
+                }
+                if (selezione.equals("annoImmatricolazione")) {
+                    System.out.println(filtro);
+                    List<Mezzo> listaMezzi = mezzoDao.trovaPerAnnoImmatricolazione(filtro);
+                    request.setAttribute("listaMezzi", listaMezzi);
+                }
+                if (selezione.equals("casaCostruttrice")) {
+                    System.out.println(filtro);
+                    List<Mezzo> listaMezzi = mezzoDao.trovaPerCasaCostruttrice(filtro);
+                    request.setAttribute("listaMezzi", listaMezzi);
+                }
+            }
+        }
 
         List<Prenotazione> listaPrenotazioni = prenotazioneDao.trovaPrenotazioni();
         request.setAttribute("listaPrenotazioni", listaPrenotazioni);
@@ -65,18 +87,19 @@ public class RegistraPrenotazione extends HttpServlet {
 
         // parametri che passo alla post
         String prenotazioneId = request.getParameter("id");
-        int idUtente = Integer.parseInt(request.getParameter("idUtente"));
         String dataInizio = request.getParameter("inizioPrenotazione");
         String dataFine = request.getParameter("finePrenotazione");
         String targa = request.getParameter("targa");
 
         HttpSession currentSession = request.getSession();
+
         int idUserInt = (int) currentSession.getAttribute("idUtente");
-        System.out.println(idUserInt);
+        Utente utente = new Utente();
+        utente.setId(idUserInt);
 
-        Prenotazione prenotazione = new Prenotazione(dataInizio, dataFine, idUtente, targa);
+        Mezzo mezzo = mezzoDao.trovaPerTarga(targa);
+        Prenotazione prenotazione = new Prenotazione(dataInizio, dataFine, utente, mezzo);
 
-        prenotazioneDao.salvaPrenotazione(prenotazione);
         if (prenotazioneId == null || prenotazioneId == "")
             prenotazioneDao.salvaPrenotazione(prenotazione);
         else {

@@ -13,33 +13,35 @@
             text-align: center;
         }
 
-        table {
-            margin-left: 15%;
-            min-width: 70%;
-            border: 1px solid #CCC;
-            border-collapse: collapse;
+        .table {
+            margin: auto;
+            width: 50% !important;
+            text-align: center;
+
+        }
+
+        table th {
+            text-align: center;
         }
 
         table tr {
-            line-height: 30px;
+            text-align: center;
+
         }
 
-        table tr th {
-            background: #000033;
-            color: #FFF;
+        table td {
+            text-align: center;
+            text-size-adjust: inherit;
         }
 
-        table tr td {
-            border: 1px solid #CCC;
-            margin: 5px;
+        .table .thead-dark th {
+            color: #ffffff;
+            background-color: #3F729B;
+            border-color: #ffffff;
         }
 
-        input[type=text], input[type=email], input[type=tel] {
-            min-width: 60%;
-        }
-
-        a {
-            text-decoration: none;
+        h1 {
+            text-align: center;
         }
     </style>
 </head>
@@ -65,9 +67,19 @@
                        required></td>
         </tr>
         <tr>
-            <td>Targa Mezzo Prenotato:</td>
-            <td><input type="text" name="targa" value="${prenotazione.targa}"
-                       required></td>
+            <td>Seleziona veicolo:</td>
+            <td>
+                <div class="row">
+                    <div class="col-md-6 select-outline">
+                        <select name="targa">
+                            <option value="${selected}" selected>${selected}</option>
+                            <c:forEach items="${listaMezzi}" var="mezzo">
+                                <c:if test="${mezzo.modello != selected}">
+                                    <option value="${mezzo.modello}">${mezzo.modello}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+            </td>
         </tr>
 
         <c:if test="${prenotazione.id ne null}">
@@ -83,35 +95,37 @@
     </table>
 </form>
 <br>
-<h1>Lista Prenotazioni</h1>
-<table>
+
+</table>
+</form>
+<form action="<c:url value="/RegistraPrenotazione"/>" method="get">
+    <select name="selezione">
+        <option value="modello">Modello</option>
+        <option value="annoImmatricolazione">Anno Immatricolazione</option>
+        <option value="casaCostruttrice">Casa Costruttrice</option>
+
+    </select>
+    <input type="text" name="filtro">
+    <input type="submit" value="Filtra">
+</form>
+<h1>Veicoli disponibili</h1>
+<table class="table table-striped" style="margin-left:auto;margin-right:auto;">
+    <thead class="thead-dark">
     <tr>
         <th>ID</th>
-        <th>Inizio Prenotazione</th>
-        <th>Fine Prenotazione</th>
-        <th>Targa Mezzo Prenotato</th>
-        <th>Id Utente</th>
-        <th>Aggiorna</th>
-        <th>Cancella</th>
+        <th>Targa</th>
+        <th>Modello</th>
+        <th>Anno Immatricolazione</th>
+        <th>Casa Costruttrice</th>
     </tr>
-    <c:forEach items="${listaPrenotazioni}" var="prenotazione">
-        <tr>
-            <td>${prenotazione.id}</td>
-            <td>${prenotazione.inizioPrenotazione}</td>
-            <td>${prenotazione.finePrenotazione}</td>
-            <td>${prenotazione.targaMezzo}</td>
-            <td>
-                <form action="<c:url value="/AggiornaPrenotazione"/>" method="get">
-                    <input type="hidden" name="id" value="${prenotazione.id}">
-                    <input type="submit" value="Aggiorna">
-                </form>
-            <td>
-                <form action="<c:url value="/CancellaPrenotazione"/>" method="post">
-                    <input type="hidden" name="id" value="${prenotazione.id}">
-                    <input style="background: #F00;" type="submit" value="Cancella">
-                </form>
-            </td>
-        </tr>
+    <c:forEach items="${listaMezzi}" var="mezzo">
+    <tr>
+        <td>${mezzo.id}</td>
+        <td>${mezzo.targa}</td>
+        <td>${mezzo.modello}</td>
+        <td>${mezzo.annoImmatricolazione}</td>
+        <td>${mezzo.casaCostruttrice}</td>
+    </tr>
     </c:forEach>
 </table>
 </body>

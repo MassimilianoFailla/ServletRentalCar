@@ -121,6 +121,31 @@ public class UtenteDaoImplement implements UtenteDao {
         return listaUtenti;
     }
 
+    public List<Utente> trovaPerAnnoNascita(String annoNascita){
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery(" FROM Utente U WHERE U.annoNascita = :annoNascita ");
+        query.setParameter("annoNascita", annoNascita);
+        List<Utente> listaUtenti = query.list();
+        tx.commit();
+        session.close();
+        return listaUtenti;
+    }
+
+    public Utente trovaPerEmail(String email) {
+
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery(" FROM Utente U WHERE U.email = :email ");
+        query.setParameter("email", email);
+        Utente utente = (Utente) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return utente;
+    }
+
+
+
 
     @SuppressWarnings({"unchecked", "deprecation"})
     public Utente trovaPerPassword(String password) {

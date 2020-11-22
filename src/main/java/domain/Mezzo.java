@@ -23,10 +23,10 @@ public class Mezzo implements Serializable{
     @Column(name = "annoImmatricolazione")
     private String annoImmatricolazione;
 
-    @Column(name = "targa")
-    private String targa;
+    @Column(name = "targa" , unique = true)
+    public String targa;
 
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "mezzo", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "mezzo")
     private List<Prenotazione> listaPrenotazioni;
     public List<Prenotazione> getListaPrenotazioni() {
         return listaPrenotazioni;
@@ -62,7 +62,8 @@ public class Mezzo implements Serializable{
         return casaCostruttrice;
     }
 
-    public void setCasaCostruttrice(String casaCostruttrice){
+    public void setCasaCostruttrice(String casaCostruttrice)
+    {
         this.casaCostruttrice = casaCostruttrice;
     }
 
